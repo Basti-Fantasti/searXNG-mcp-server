@@ -38,7 +38,7 @@ Before installing, ensure you have:
 ### 1. Clone the Repository
 
 ```bash
-git clone <YOUR_REPO_URL>.git
+git clone https://github.com/Basti-Fantasti/searXNG-mcp-server.git
 cd searxng-mcp-server
 ```
 
@@ -115,6 +115,82 @@ docker logs searxng
 docker logs -f searxng
 ```
 
+## Claude Code Configuration
+
+To use this MCP server with Claude Code, add it to your MCP configuration:
+
+### Global Configuration (All Projects)
+
+Edit `~/.claude/mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "searxng": {
+      "command": "uv",
+      "args": [
+        "--directory",
+        "/absolute/path/to/searxng-mcp-server",
+        "run",
+        "searxng-mcp"
+      ],
+      "env": {
+        "SEARXNG_BASE_URL": "http://localhost:9999"
+      }
+    }
+  }
+}
+```
+
+### Project-Level Configuration
+
+Create `.claude/mcp.json` in your project root:
+
+```json
+{
+  "mcpServers": {
+    "searxng": {
+      "command": "uv",
+      "args": [
+        "--directory",
+        "/absolute/path/to/searxng-mcp-server",
+        "run",
+        "searxng-mcp"
+      ],
+      "env": {
+        "SEARXNG_BASE_URL": "http://localhost:9999"
+      }
+    }
+  }
+}
+```
+
+### Windows Path Example
+
+```json
+{
+  "mcpServers": {
+    "searxng": {
+      "command": "uv",
+      "args": [
+        "--directory",
+        "C:\\absolute\\path\\to\\searxng-mcp-server",
+        "run",
+        "searxng-mcp"
+      ],
+      "env": {
+        "SEARXNG_BASE_URL": "http://localhost:9999"
+      }
+    }
+  }
+}
+```
+
+**Important Notes:**
+- Use **absolute paths**, not relative paths
+- Restart Claude Code after modifying the configuration
+- Ensure SearXNG is running before using the search tool
+
 ## Claude Desktop Configuration
 
 To use this MCP server with Claude Desktop, add it to your configuration file:
@@ -153,7 +229,7 @@ Edit `%APPDATA%\Claude\claude_desktop_config.json`:
       "command": "uv",
       "args": [
         "--directory",
-        "X:\\absolute\\path\\to\\searxng-mcp-server",
+        "C:\\absolute\\path\\to\\searxng-mcp-server",
         "run",
         "searxng-mcp"
       ],
@@ -170,11 +246,6 @@ Edit `%APPDATA%\Claude\claude_desktop_config.json`:
 - Restart Claude Desktop after modifying the configuration
 - Ensure SearXNG is running before starting Claude Desktop
 
-## Claude Code Configuration
-
-Claude Code automatically detects and uses MCP servers configured in Claude Desktop. No additional configuration needed.
-
-Alternatively, you can configure it separately in the MCP settings within Claude Code.
 
 ## Usage Examples
 
