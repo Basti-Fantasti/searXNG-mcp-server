@@ -1,0 +1,23 @@
+# SearXNG configuration for MCP server
+use_default_settings: true
+
+server:
+  # Disable limiter to allow API access
+  limiter: false
+  # Allow JSON format
+  image_proxy: false
+
+search:
+  # Enable JSON output format
+  formats:
+    - html
+    - json
+
+# Optional: Increase max results
+engines:
+  - name: google
+    disabled: false
+  - name: bing
+    disabled: false
+  - name: duckduckgo
+    disabled: false

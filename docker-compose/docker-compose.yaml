@@ -1,0 +1,10 @@
+name: searxng
+services:
+    searxng:
+        ports:
+            - 9999:8080
+        image: searxng/searxng
+        volumes:
+            - ./searxng-settings.yml:/etc/searxng/settings.yml:ro
+        environment:
+            - SEARXNG_BASE_URL=http://localhost:9999
